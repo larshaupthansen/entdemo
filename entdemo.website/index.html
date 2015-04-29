@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://github.jspm.io/jmcriffey/bower-traceur-runtime@0.0.87/traceur-runtime.js"></script>
+    <script src="https://jspm.io/system@0.16.js"></script>
+    <script src="/angular2/angular2-bundle.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="//platform.linkedin.com/in.js">
+    api_key:   77ne8opwwucq5l
+    onLoad:    linkedinJS
+    authorize: true
+    lang:      da_DK
+    </script>
+</head>
+<body>
+
+
+<entdemo-app></entdemo-app>
+
+    
+    <script>
+
+        function linkedinJS() {
+             System.import('app/main');
+        }
+
+        function externalLogin(email) {
+             $.ajax( {
+                url: "/api/Account/RegisterExternal",
+                method: "POST",
+                data:  {
+                    "Email": "lars@haupt-hansen.dk"
+                },
+                success : function(data) {
+                    console.log("SUCCESS");
+                    console.log(data);
+                },
+
+                error: function(data) {
+                     console.log("ERROR");
+                    console.log(data);
+                },
+            });
+        }
+
+    </script>
+
+
+</body>
+</html>
