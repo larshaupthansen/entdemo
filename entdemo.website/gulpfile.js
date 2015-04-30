@@ -30,7 +30,7 @@ gulp.task('gen-ts-refs', function () {
  * Lint all custom TypeScript files.
  */
 gulp.task('ts-lint', function () {
-    return gulp.src(config.allTypeScript).pipe(tslint()).pipe(tslint.report('prose'));
+    return gulp.src(config.allTypeScript).pipe(tslint()).pipe(tslint.report('verbose'));
 });
 
 /**
@@ -39,13 +39,17 @@ gulp.task('ts-lint', function () {
 gulp.task('compile-ts', function () {
     var sourceTsFiles = [config.allTypeScript,                //path to typescript files
                          config.libraryTypeScriptDefinitions, //reference to library .d.ts files
-                         config.appTypeScriptReferences];     //reference to app.d.ts files
+                         config.appTypeScriptReferences,  //reference to app.d.ts files
+                         config.angular2];   
 
     var tsResult = gulp.src(sourceTsFiles)
                        .pipe(sourcemaps.init())
                        .pipe(tsc({
+                           typescript: require('typescript'),
                            target: 'ES5',
                            declarationFiles: false,
+                          emitDecoratorMetadata: true,
+                           module: "AMD",
                            noExternalResolve: true
                        }));
 
@@ -73,4 +77,4 @@ gulp.task('watch', function() {
     gulp.watch([config.allTypeScript], ['ts-lint', 'compile-ts', 'gen-ts-refs']);
 });
 
-gulp.task('default', ['ts-lint', 'compile-ts', 'gen-ts-refs', 'watch']);
+gulp.task('default', ['ts-lint','compile-ts', 'gen-ts-refs']);

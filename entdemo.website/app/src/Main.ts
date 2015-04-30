@@ -1,7 +1,8 @@
+/* tslint:disable */ 
+
 import {Component, View, bootstrap, For, If} from 'angular2/angular2';
 import {bind} from 'angular2/di';
-import {} from 'tools/typings/linkedin'
-
+import {} from 'tools/typings/linkedin';
 @Component({
   selector: 'entdemo-app',
   injectables: []
@@ -10,16 +11,15 @@ import {} from 'tools/typings/linkedin'
 
 
 @View({
-  templateUrl: 'app-views/main.html',
-  directives: [For, If],
+  templateUrl: 'views/main.html',
+  directives: [For, If]
 })
-
-
+/* tslint:enable */
 
 class Main {
- 
+
   loggedIn: boolean;
-  profile: any;
+  profile: any; // test
 
   constructor() {
 
@@ -28,25 +28,25 @@ class Main {
 
 
   loginLinkedIn() : boolean {
-          console.log("LOGGED IN");
+          console.log('LOGGED IN');
 
       IN.User.authorize(() => {
           this.loggedIn = true;
-          IN.API.Raw("/people/~:(id,formatted-name,location,headline,industry,picture-url,email-address)").result(function(data) {
+          IN.API.Raw('/people/~:(id,formatted-name,location,headline,industry,picture-url,email-address)').result(function(data) {
                     console.log(data);
                     this.profile = data;
-                }).error(function(error) {console.log(error);});
+                }).error(function(error) {console.log(error); });
         }, null);
       return true;
   }
 
   logoutLinkedIn(): boolean {
-      console.log("LOGGED OUT");
+      console.log('LOGGED OUT');
       IN.User.logout(() => {
           this.loggedIn = false;
       }, null);
     return true;
   }
-  
+
 }
 bootstrap(Main);

@@ -5,7 +5,7 @@
   "contributors": [
     {
       "name": "Lars Haupt-Hansen",
-      "email": "lars@haupt-hansen.dk"
+      "ema  il": "lars@haupt-hansen.dk"
     }
   ],
   "keywords": [
@@ -13,7 +13,7 @@
     "typescript"
   ],
   "license": "ISC",
-  "readme" : "README.md"
+  "readme" : "README.md",
   "dependencies": {
   },
   "devDependencies": {
@@ -22,8 +22,8 @@
     "gulp-inject": "^1.1.1",
     "gulp-rimraf": "^0.1.1",
     "gulp-sourcemaps": "^1.3.0",
-    "gulp-tsd": "0.0.4",
     "gulp-tslint": "^1.4.3",
+    "typescript": "1.5.0-alpha",
     "gulp-typescript": "^2.4.2"
   }
 }
