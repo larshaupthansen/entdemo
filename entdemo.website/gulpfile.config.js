@@ -1,11 +1,11 @@
 'use strict';
 var GulpConfig = (function () {
     function GulpConfig() {
-        this.source = './app/';
+        this.source = './app';
         this.sourceApp ='./app/src';
 
-        this.tsOutputPath = this.source + '/js';
-        this.allJavaScript = [this.source + '/js/**/*.js'];
+        this.tsOutputPath = this.source ;
+        this.allJavaScript = [this.source + '/**/*.js'];
         this.allTypeScript = this.sourceApp + '/**/*.ts';
 
         this.typings = './tools/typings/';

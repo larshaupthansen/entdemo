@@ -1,3 +1,8 @@
 // Place your settings in this file to overwrite default and user settings.
 {
+	
+	// Complete functions with their parameter signature.
+	"typescript.module": "AMD",
+	"typescript.noExternalResolve": true,
+	"typescript.sourceRoot": ".."
 }

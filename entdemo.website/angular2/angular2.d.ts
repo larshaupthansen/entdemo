@@ -3,7 +3,7 @@ interface List<T> extends Array<T> {
 interface Type {}
 
 declare module "angular2/angular2" {
-  function bootstrap(appComponentType: any): void;
+  function bootstrap(appComponentType: Type, componentInjectableBindings: List<any>, errorReporter: Function): void;
   function Component({
     selector,
     properties,

@@ -1,52 +1,65 @@
-/* tslint:disable */ 
 
+/// <reference path="../../tools/typings/tsd.d.ts" />
+
+/// <reference path="model/profile.ts" />
+
+/* tslint:disable */ 
 import {Component, View, bootstrap, For, If} from 'angular2/angular2';
 import {bind} from 'angular2/di';
-import {} from 'tools/typings/linkedin';
+
+import {AuthenticationService} from 'app/service/authenticationservice'
+
 @Component({
   selector: 'entdemo-app',
-  injectables: []
-  })
-
-
+   injectables: [
+  ]
+})
 
 @View({
-  templateUrl: 'views/main.html',
+  templateUrl: 'app/views/main.html',
   directives: [For, If]
 })
 /* tslint:enable */
 
+
 class Main {
 
   loggedIn: boolean;
-  profile: any; // test
+  profile: model.Profile = new model.Profile();
+  time: string;
+  authenticationService: AuthenticationService;
 
-  constructor() {
 
-      this.loggedIn = IN.User.isAuthorized();
+  constructor(authenticationService : AuthenticationService) {
+
+      this.time = '';
+      this.loggedIn = sessionStorage.getItem('Bearer') != null;
+      if (this.loggedIn) {
+        this.getProfile();
+      }
+
+      setInterval(function() {
+        this.time = (new Date()).toString();
+        }.bind(this), 1);
+
   }
 
 
   loginLinkedIn() : boolean {
-          console.log('LOGGED IN');
 
-      IN.User.authorize(() => {
-          this.loggedIn = true;
-          IN.API.Raw('/people/~:(id,formatted-name,location,headline,industry,picture-url,email-address)').result(function(data) {
-                    console.log(data);
-                    this.profile = data;
-                }).error(function(error) {console.log(error); });
-        }, null);
-      return true;
+    this.authenticationService.redirectToLinkedLogin();
+    return true;
+  }
+
+  getProfile()  {
+   // this.authenticationService.getProfile( (data: Profile) => this.profile = data );
   }
 
   logoutLinkedIn(): boolean {
-      console.log('LOGGED OUT');
-      IN.User.logout(() => {
-          this.loggedIn = false;
-      }, null);
     return true;
   }
 
 }
-bootstrap(Main);
+bootstrap(Main, [
+  bind(AuthenticationService).toValue(new AuthenticationService())
+], () => { });

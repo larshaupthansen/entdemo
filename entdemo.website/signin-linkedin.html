@@ -5,40 +5,19 @@
 </head>
 <body>
 
-    <script src="bower_components/URIjs/src/URI.min.js"></script>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="//platform.linkedin.com/in.js"></script>
+
+    <script src="bower_components/uri.js/src/URI.min.js"></script>
     <script>
 
         var uri = new URI(window.location.href);
-
         if(uri.hasSearch("access_token")) {
 
             var accessToken = uri.search(true).access_token;
+            sessionStorage.setItem("Bearer", accessToken);
+            window.location = "/index.html";
 
             //Authorization: Bearer AQXdSP_W41_UPs5ioT_t8HESyODB4FqbkJ8LrV_5mff4gPODzOYR
-            $.ajax({
-                url: "https://api.linkedin.com/v1/people/~",
-                method: "GET",
-
-                data: {
-                    format: 'json'
-                },
-                beforeSend: function (xhr) {
-                      xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
-                      xhr.setRequestHeader("Testing", "123");
-
-                },
-                complete: function(xhr, status) {
-                    console.log("COMPLETE");
-                    console.log(xhr);
-                    console.log(status);
-                },
-                success: function(data) {
-
-                    console.log(data);
-                }
-            });
+            
         }
 
         function linkedinSuccess(data) {

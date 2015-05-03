@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations;
 namespace entdemo.website.Models.Entdemo
 {
     public class Tenant

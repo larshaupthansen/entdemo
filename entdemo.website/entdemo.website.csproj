@@ -22,6 +22,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -221,7 +222,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LinkedInAuthController.cs" />
     <Compile Include="Controllers\LinkedInController.cs" />
     <Compile Include="Controllers\TenantController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -239,6 +239,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="angular2\angular2-bundle.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -292,10 +293,12 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="typescript\linkedin.d.ts" />
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <TypeScriptCompile Include="angular2\angular.http.d.ts" />
+    <TypeScriptCompile Include="angular2\angular2.d.ts" />
+    <TypeScriptCompile Include="tools\typings\linkedin.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

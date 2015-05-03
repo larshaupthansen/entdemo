@@ -4,9 +4,13 @@ var gulp = require('gulp'),
     debug = require('gulp-debug'),
     inject = require('gulp-inject'),
     tsc = require('gulp-typescript'),
+    tsd = require('gulp-tsd'),
     tslint = require('gulp-tslint'),
     sourcemaps = require('gulp-sourcemaps'),
     rimraf = require('gulp-rimraf'),
+    livereload = require('gulp-livereload'),
+    superstatic = require('superstatic'),
+    connect = require('connect'),
     Config = require('./gulpfile.config');
 
 var config = new Config();
@@ -34,6 +38,17 @@ gulp.task('ts-lint', function () {
 });
 
 /**
+ * Update Typescript defintion files
+ */
+gulp.task('tsd', function (callback) {
+    tsd({
+        command: 'reinstall',
+        config: './tsd.json'
+    }, callback);
+});
+
+
+/**
  * Compile TypeScript and include references to library and app .d.ts files.
  */
 gulp.task('compile-ts', function () {
@@ -47,6 +62,7 @@ gulp.task('compile-ts', function () {
                        .pipe(tsc({
                            typescript: require('typescript'),
                            target: 'ES5',
+                           sourceRoot: "..",
                            declarationFiles: false,
                           emitDecoratorMetadata: true,
                            module: "AMD",
@@ -73,8 +89,35 @@ gulp.task('clean-ts', function () {
       .pipe(rimraf());
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['server'], function() {
+    var server=livereload();
     gulp.watch([config.allTypeScript], ['ts-lint', 'compile-ts', 'gen-ts-refs']);
+});
+
+
+gulp.task('server', ['default'], function(next) {
+    var app = connect() 
+                .use(superstatic({
+        port: 8080,
+        logger: {
+          info: function(msg) {
+            console.log('Info:', msg);
+          },
+          error: function(msg) {
+            console.error('Error:', msg);
+          }
+        },    
+    }));
+    
+    app.use('/api/tenant', function fooMiddleware(req, res, next) {     
+          next();
+    });
+    app.listen(8080, function(err) {
+        console.log("Server is now listening on port 8080");
+    });
+       
+    next();
+    
 });
 
 gulp.task('default', ['ts-lint','compile-ts', 'gen-ts-refs']);
