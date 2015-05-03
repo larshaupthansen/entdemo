@@ -77,7 +77,7 @@ namespace entdemo.website.Providers
             {
                 Uri expectedRootUri = new Uri(context.Request.Uri, "/");
 
-                if (expectedRootUri.AbsoluteUri == context.RedirectUri)
+                if (context.RedirectUri.StartsWith(expectedRootUri.AbsoluteUri))
                 {
                     context.Validated();
                 }

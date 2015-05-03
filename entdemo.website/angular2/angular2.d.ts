@@ -2,8 +2,9 @@ interface List<T> extends Array<T> {
 }
 interface Type {}
 
+
 declare module "angular2/angular2" {
-  function bootstrap(appComponentType: Type, componentInjectableBindings: List<any>, errorReporter: Function): void;
+  function bootstrap(appComponentType: Type, componentInjectableBindings?: List<any>, errorReporter?: Function): void;
   function Component({
     selector,
     properties,
@@ -43,4 +44,6 @@ declare module "angular2/angular2" {
 
 declare module "angular2/di" {
     export function bind(token: any): any;
+    
+    function Injectable();
 }

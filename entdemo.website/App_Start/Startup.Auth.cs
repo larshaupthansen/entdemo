@@ -66,8 +66,8 @@ namespace entdemo.website
             //});
 
             LinkedInAuthenticationOptions linkedInOptions = new LinkedInAuthenticationOptions() {
-                AppSecret = "m8KpJreWhjcCXHoh",
-                AppId = "78u4wpongbhtvp"
+                AppSecret = "5AySUuNe4m8ealLz",
+                AppId = "77ne8opwwucq5l"
             };
             app.UseLinkedInAuthentication(linkedInOptions);
         }
