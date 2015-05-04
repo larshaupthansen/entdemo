@@ -26,5 +26,7 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 entdemo.website/node_modules
 entdemo.website/bower_components
+prototype/node_modules
+prototype/bower_components
 
 Packages

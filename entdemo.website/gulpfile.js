@@ -96,25 +96,22 @@ gulp.task('watch', ['server'], function() {
 
 
 gulp.task('server', ['default'], function(next) {
-    var app = connect() 
-                .use(superstatic({
-        port: 8080,
-        logger: {
-          info: function(msg) {
-            console.log('Info:', msg);
-          },
-          error: function(msg) {
-            console.error('Error:', msg);
-          }
-        },    
-    }));
-    
+    var superstatic = require('superstatic').server;
+    var app = superstatic(
+        {
+            port: 8080,
+            config: {
+            }
+        }        
+    );
+ 
     app.use('/api/tenant', function fooMiddleware(req, res, next) {     
           next();
     });
-    app.listen(8080, function(err) {
-        console.log("Server is now listening on port 8080");
-    });
+
+    app.listen(function () {
+         console.log("Somebody is listening");
+    });    
        
     next();
     
