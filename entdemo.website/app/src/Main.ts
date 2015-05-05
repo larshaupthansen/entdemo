@@ -8,6 +8,7 @@ import {Component, View, bootstrap, For, If} from 'angular2/angular2';
 import {bind} from 'angular2/di';
 
 import {IAuthenticationService,AuthenticationService,ExternalLoginViewModel} from 'app/service/authenticationservice'
+import {Login} from 'app/components/login'
 
 @Component({
   selector: 'entdemo-app',
@@ -28,52 +29,16 @@ import {IAuthenticationService,AuthenticationService,ExternalLoginViewModel} fro
 
 class Main {
 
-  loggedIn: boolean;
-  profile: model.Profile = new model.Profile();
   time: string;
-  authenticationService : IAuthenticationService;
-  loginProviders: ExternalLoginViewModel[];
 
   constructor() {
   
-      this.authenticationService = new AuthenticationService();
-      
-      this.loginProviders = new Array<ExternalLoginViewModel[]>();
-      this.loginProviders.push( {
-        Name: "test",
-        Url : ""
-        
-      })
-      
-      var callback = (data: ExternalLoginViewModel[]) => this.loginProviders = data;
-      this.authenticationService.getLoginProviders(callback); 
-      
       this.time = '';
-      this.loggedIn = sessionStorage.getItem('Bearer') != null;
-      if (this.loggedIn) {
-        this.getProfile();
-      }
 
       setInterval(function() {
         this.time = (new Date()).toString();
         }.bind(this), 1);
 
   }
-
-
-  loginLinkedIn() : boolean {
-
-    this.authenticationService.redirectToLinkedLogin();
-    return true;
-  }
-
-  getProfile()  {
-    this.authenticationService.getLinkedInProfile( function(data: model.Profile) {this.profile = data });
-  }
-
-  logoutLinkedIn(): boolean {
-    return true;
-  }
-
 }
-bootstrap(Main, [ bind(IAuthenticationService).toValue(new AuthenticationService()) ]);
+bootstrap(Main);

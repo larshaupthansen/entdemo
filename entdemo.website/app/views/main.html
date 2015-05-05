@@ -1,13 +1,6 @@
-<h1>Hello {{profile.formattedName}}</h1>
-<p>Current time is {{ time }}</p>
+<h1>Hello</h1>
 
-<ul>
-	<li *for="#provider of loginProviders">
-		<a href="{{provider.Url}}" class="btn btn-default">
-			{{provider.Name}}
-		</a>
-	</li>
-	
-</ul>
-<button (click)="loginLinkedIn()" *if="loggedIn==false">Login</button>
-<button (click)="logoutLinkedIn()" *if="loggedIn==true">Logout</button>
+<login></login>
+
+<!--<button (click)="loginLinkedIn()" *if="loggedIn==false">Login</button>
+<button (click)="logoutLinkedIn()" *if="loggedIn==true">Logout</button>-->

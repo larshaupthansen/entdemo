@@ -45,10 +45,10 @@ export class AuthenticationService  implements IAuthenticationService {
       public getLoginProviders(callback: (data: ExternalLoginViewModel[])=> void) {
                   
             $.ajax( {
-                  url: "/api/Account/ExternalLogins",
-                  method: "GET",
+                  url: '/api/Account/ExternalLogins',
+                  method: 'GET',
                   data: {                        
-                        returnUrl: "/signin-linkedin.html",
+                        returnUrl: '/signin-linkedin.html',
                         generateState: true
                   },
                   success : function(providerList: ExternalLoginViewModel[]) {
@@ -58,7 +58,7 @@ export class AuthenticationService  implements IAuthenticationService {
                 },
 
                 error: function(data) {
-                     console.log("ERROR");
+                     console.log('ERROR');
                     console.log(data);
                 }
             });
@@ -76,10 +76,10 @@ export class AuthenticationService  implements IAuthenticationService {
                 console.log(data);
                 
                 $.ajax( {
-                  url: "/api/Account/UserInfo",
-                  method: "GET",
+                  url: '/api/Account/UserInfo',
+                  method: 'GET',
                   beforeSend(xhr: JQueryXHR) {
-                        xhr.setRequestHeader("Authorization", "Bearer "+sessionStorage.getItem('Bearer'));
+                        xhr.setRequestHeader('Authorization', 'Bearer '+sessionStorage.getItem('Bearer'));
                   },
                   
                   success : function(userInfo: UserInfoViewModel) {
@@ -88,9 +88,9 @@ export class AuthenticationService  implements IAuthenticationService {
                 },
 
                 error: function(data) {
-                     console.log("ERROR");
+                     console.log('  ERROR');
                     console.log(data);
-                },
+                }
             });
                 callback(data);
             }

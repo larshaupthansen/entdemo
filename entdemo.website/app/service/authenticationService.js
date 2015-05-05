@@ -33,10 +33,10 @@ define(["require", "exports"], function (require, exports) {
         };
         AuthenticationService.prototype.getLoginProviders = function (callback) {
             $.ajax({
-                url: "/api/Account/ExternalLogins",
-                method: "GET",
+                url: '/api/Account/ExternalLogins',
+                method: 'GET',
                 data: {
-                    returnUrl: "/signin-linkedin.html",
+                    returnUrl: '/signin-linkedin.html',
                     generateState: true
                 },
                 success: function (providerList) {
@@ -44,7 +44,7 @@ define(["require", "exports"], function (require, exports) {
                     callback(providerList);
                 },
                 error: function (data) {
-                    console.log("ERROR");
+                    console.log('ERROR');
                     console.log(data);
                 }
             });
@@ -60,18 +60,18 @@ define(["require", "exports"], function (require, exports) {
                 success: function (data) {
                     console.log(data);
                     $.ajax({
-                        url: "/api/Account/UserInfo",
-                        method: "GET",
+                        url: '/api/Account/UserInfo',
+                        method: 'GET',
                         beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem('Bearer'));
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('Bearer'));
                         },
                         success: function (userInfo) {
                             console.log(userInfo);
                         },
                         error: function (data) {
-                            console.log("ERROR");
+                            console.log('  ERROR');
                             console.log(data);
-                        },
+                        }
                     });
                     callback(data);
                 }

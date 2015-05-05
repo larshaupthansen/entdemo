@@ -1,0 +1,8 @@
+<div class="btn-group" role="group" aria-label="Login providers">
+	<span *for="#provider of loginProviders">
+		<a href="{{provider.Url}}" class="btn btn-default">
+			<img src="/images/providers/{{provider.Name}}.png" alt='{{provider.Name}}'/>				
+			{{provider.Name}}
+		</a>
+	</span>	
+</div>
